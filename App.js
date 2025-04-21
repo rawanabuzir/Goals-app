@@ -10,9 +10,13 @@ export default function App() {
     setGoals([...goals, goal]);
     setGoal('');
   };
-
+  const deleteGoal = (indexToRemove) => {
+    setGoals((currentGoals) => currentGoals.filter((_, index) => index !== indexToRemove));
+  };
+  
   return (
     <View style={styles.container}>
+    
       <Text style={styles.title}>🎯 My Goals</Text>
 
       <View style={styles.inputContainer}>
@@ -30,10 +34,18 @@ export default function App() {
       <View style={styles.divider} />
 
       <ScrollView style={styles.list}>
-        {goals.map((g, index) => (
-          <Text key={index} style={styles.item}>{g}</Text>
-        ))}
-      </ScrollView>
+  {goals.map((g, index) => (
+    <Text
+      key={index}
+      style={styles.item}
+      onPress={() => deleteGoal(index)}
+    >
+      {g}
+    </Text>
+  ))}
+</ScrollView>
+
+      
     </View>
   );
 }
